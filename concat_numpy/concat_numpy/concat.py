@@ -29,14 +29,6 @@ class ConcatFramesNumpy:
     @read_frame.setter
     def read_frame(self, file):
         self._read_frames = file
-    
-    @property
-    def file_path(self):
-        return self._file_path
-    
-    @file_path.setter
-    def file_path(self, path):
-        self._file_path = path
 
     @property
     def output_folder(self):
