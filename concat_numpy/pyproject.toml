@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "concat-numpy"
+version = "0.1.0"
+description = ""
+authors = ["j.senra <judson.nascimento@aperam.com>"]
+readme = "README.md"
+packages = [{include = "concat_numpy"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^1.25.2"
+opencv-python = "^4.8.0.76"
+moviepy = "^1.0.3"
+ipykernel = "^6.25.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
