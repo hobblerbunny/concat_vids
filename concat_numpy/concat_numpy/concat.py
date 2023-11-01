@@ -56,12 +56,12 @@ class ConcatFramesNumpy:
             os.makedirs(f"{self.output_folder}", exist_ok=True)
 
             for i, frame in enumerate(file):
-                frame_filename = os.path.join(f"{self.output_folder}", f'frame_{i:04d}.jpg')
+                frame_filename = os.path.join(f"../../../../{self.output_folder}", f'frame_{i:04d}.jpg')
                 cv2.imwrite(frame_filename, frame)
 
         if isinstance(file, ImageSequenceClip):
-            os.makedirs(f"{self.output_folder}", exist_ok=True)
-            file.write_videofile(f'{self.output_folder}/{video_name}.mp4')
+            os.makedirs(f"../../../../{self.output_folder}", exist_ok=True)
+            file.write_videofile(f'../../../../{self.output_folder}/{video_name}.mp4')
 
         return
 
