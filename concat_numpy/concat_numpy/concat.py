@@ -69,4 +69,19 @@ class ConcatFramesNumpy:
         clip = ImageSequenceClip(frames, fps=fps)
 
         return clip
+    
+    def matrix_color(self, frames, type):
+        if type=="BGR>RGB":
+            change_matrix = cv2.COLOR_BGR2RGB
+        elif type=="BGR>GRAY":
+            change_matrix = cv2.COLOR_BGR2GRAY
+        elif type=="RGB>GRAY":
+            change_matrix = cv2.COLOR_RGB2GRAY
+
+        new_frame_list = []
+        for frame in frames:
+            new_frame_color = cv2.cvtColor(frame, change_matrix)
+            new_frame_list.append(new_frame_color)
+
+        return new_frame_list
         
