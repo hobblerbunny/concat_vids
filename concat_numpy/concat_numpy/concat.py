@@ -2,6 +2,8 @@ import numpy as np
 import cv2
 from moviepy.video.io.ImageSequenceClip import ImageSequenceClip
 import os
+from datetime import datetime
+import time
 
 class ConcatFramesNumpy:
     def __init__(self):
@@ -49,21 +51,36 @@ class ConcatFramesNumpy:
         
         return concat_frames
 
-    def save(self, file, video_name="video"):
-        if isinstance(file, list):
-            if self.output_folder is None:
-                raise ValueError("Output folder path is not set.")
-            os.makedirs(f"{self.output_folder}", exist_ok=True)
+    def save(self, file, video_name="video", data=False):
+        if data == True:
+            data_formatada = datetime.fromtimestamp(time.time()).strftime('%Y-%d-%m_%H.%M.%S')
+            nome_dir = data_formatada+"_"+self.output_folder
+            if isinstance(file, list):
+                if self.output_folder is None:
+                    raise ValueError("Output folder path is not set.")
+                os.makedirs(f"{nome_dir}", exist_ok=True)
 
-            for i, frame in enumerate(file):
-                frame_filename = os.path.join(f"../../../../{self.output_folder}", f'frame_{i:04d}.jpg')
-                cv2.imwrite(frame_filename, frame)
+                for i, frame in enumerate(file):
+                    frame_filename = os.path.join(f"../../{nome_dir}", f'frame_{i:04d}.jpg')
+                    cv2.imwrite(frame_filename, frame)
 
-        if isinstance(file, ImageSequenceClip):
-            os.makedirs(f"../../../../{self.output_folder}", exist_ok=True)
-            file.write_videofile(f'../../../../{self.output_folder}/{video_name}.mp4')
+            if isinstance(file, ImageSequenceClip):
+                os.makedirs(f"../../{self.output_folder}", exist_ok=True)
+                file.write_videofile(f'../../{self.output_folder}/{video_name}.mp4')
+        else:
+            if isinstance(file, list):
+                if self.output_folder is None:
+                    raise ValueError("Output folder path is not set.")
+                os.makedirs(f"{self.output_folder}", exist_ok=True)
 
-        return
+                for i, frame in enumerate(file):
+                    frame_filename = os.path.join(f"../../{self.output_folder}", f'frame_{i:04d}.jpg')
+                    cv2.imwrite(frame_filename, frame)
+
+            if isinstance(file, ImageSequenceClip):
+                os.makedirs(f"../../{self.output_folder}", exist_ok=True)
+                file.write_videofile(f'../../{self.output_folder}/{video_name}.mp4')
+
 
     def convert_vid(self, frames, fps=30):
         clip = ImageSequenceClip(frames, fps=fps)
